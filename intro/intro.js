@@ -12,12 +12,3 @@ function createFiles(filesData){
     }
 }
 
-
-fileData = {
-    fileName:"number",
-    fileType:'txt',
-    fileData:122
-}
-
-l = [fileData]
-createFiles(l)
