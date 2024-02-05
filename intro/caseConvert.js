@@ -78,5 +78,3 @@ function fixStreetName(filename) {
     });
 }
 
-
-fixStreetName('streetNames.txt')
