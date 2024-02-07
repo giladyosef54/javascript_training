@@ -10,7 +10,6 @@ function retrunRndIn3Sec() {
 }
   
 async function asyncCall() {
-    console.log('calling');
     retrunRndIn3Sec().then(result => console.log(result)).catch(error => console.error(error));
 }
 

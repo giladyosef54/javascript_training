@@ -8,7 +8,6 @@ function retrunRndIn3Sec() {
 }
   
 async function asyncCall() {
-    console.log('calling');
     const result = await retrunRndIn3Sec();
     console.log(result);
 }
