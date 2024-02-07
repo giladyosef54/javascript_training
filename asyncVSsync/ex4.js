@@ -12,8 +12,4 @@ function printSortedArray(arr) {
     for (let num of arr) {
         promiseForeachNumber(num).then(num => console.log(num));
     }
-    
 }
-
-
-
