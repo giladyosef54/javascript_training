@@ -7,8 +7,7 @@ function retrunRndIn3Sec() {
     });
 }
   
-async function asyncCall() {
-    const result = await retrunRndIn3Sec();
-    console.log(result);
+function printRandom() {
+    retrunRndIn3Sec().then(result => console.log(result));
 }
-  
+
