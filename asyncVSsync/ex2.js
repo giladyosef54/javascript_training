@@ -9,7 +9,6 @@ function retrunRndIn3Sec() {
     });
 }
   
-async function asyncCall() {
+function printValidInt() {
     retrunRndIn3Sec().then(result => console.log(result)).catch(error => console.error(error));
 }
-
