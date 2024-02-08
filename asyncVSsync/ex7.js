@@ -9,9 +9,5 @@ function createNestedPromise() {
                 }, 1000)
             }))
         }, 500)
-        
     })
 }
-
-
-
