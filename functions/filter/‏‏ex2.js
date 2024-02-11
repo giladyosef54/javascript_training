@@ -1,5 +1,2 @@
-function filterCategory(arrOfObj, category) {
-    return arrOfObj.filter(obj => {
-        return obj.category == category
-    })
-}
+const filterCategory = (arrOfObj, category) =>  arrOfObj.filter(obj => obj.category == category)
+

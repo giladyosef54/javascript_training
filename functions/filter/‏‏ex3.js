@@ -1,5 +1,1 @@
-function filterPastDates(arrOfDatesStr) {
-    return arrOfDatesStr.filter(dateStr => {
-        return new Date > new Date(dateStr)
-    })
-}
+const filterPastDates = (arrOfDatesStr) => arrOfDatesStr.filter(dateStr => new Date > new Date(dateStr))

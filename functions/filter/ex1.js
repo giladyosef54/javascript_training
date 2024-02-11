@@ -1,6 +1,2 @@
-function myFilter(arrayOfStr) {
-    return arrayOfStr.filter(str => {
-        return str.search(/a|e|i|o|u/) != -1
-    })
-}
+const getVoweledStr = (arrayOfStr) => arrayOfStr.filter(str => str.search(/a|A|e|E|i|I|o|O|u|U/) != -1)
 
