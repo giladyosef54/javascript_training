@@ -1,10 +1,4 @@
-function reduceHours(arrOfDurations) {
-    return arrOfDurations.filter(duration => {
-        return duration >= 24
-    }).map(longDuration => {
-        return longDuration/24
-    })
-}
+const reduceHours = (arrOfDurations) => arrOfDurations.filter(duration => duration >= 24).map(longDuration => longDuration/24)
 
 
 

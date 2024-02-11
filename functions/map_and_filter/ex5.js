@@ -1,5 +1,4 @@
-function squarePositives(arrOfNum) {
-    return arrOfNum.filter(num => num > 0).map(posNum => posNum**2)
-}
+const squarePositives = (arrOfNum) => arrOfNum.filter(num => num > 0).map(posNum => posNum**2)
+
 
 
