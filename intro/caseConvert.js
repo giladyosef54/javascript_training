@@ -1,63 +1,33 @@
-function splitData(data){
-    return data.split("_")
-}
+const fs = require('fs');
+
 
 function strOrEmpty (element) {
-    if (typeof(element) == undefined)
-        return ''
-    else return element
+    return (typeof element? element: '')
 }
 
 
 
 let converter = {
-    camelCase:(splitedData) => {
-        return strOrEmpty(splitedData[0]).toLowerCase() + this.pascalCase(splitedData.slice(1)).join('')
+    camelCase: function (splitedData) {
+        return strOrEmpty(splitedData[0]).toLowerCase() + this.pascalCase(splitedData.slice(1))
     },
-    pascalCase:(splitedData) => {
-        return splitedData.map(element => {
-            return strOrEmpty(element[0]).toUpperCase() + element.slice(1).toLowerCase()
-        }).join('');
+    pascalCase: (splitedData) => {
+        return splitedData.map(element => strOrEmpty(element[0]).toUpperCase() + element.slice(1).toLowerCase()).join('')
     },
     kebabCase: (splitedData) => {
-        return splitData.map((element) => {element.toLowerCase()}).join('-')
+        return splitedData.map((element) => element.toLowerCase()).join('-')
     },
-    snakeCase: () => {
-        return splitData.map((element) => {element.toLowerCase()}).join('_')
+    snakeCase: (splitedData) => {
+        return splitedData.map((element) => element.toLowerCase()).join('_')
     },
-    constantCase:function(){
-        return splitData.map((element) => {element.toUpperCase()}).join('_')
+    constantCase: (splitedData) => {
+        return splitedData.map((element) => element.toUpperCase()).join('_')
     },
-    pathlCase:function(){
-        return splitedData.join('/')
-    },
+    pathCase: (splitedData) => splitedData.join('/')
 }
 
 
-
-
 function fixStreetName(filename) {
-    const fs = require('fs');
-    const readline = require('readline');
-
-    
-    const fileStream = fs.createReadStream(filename);
-
-    const rl = readline.createInterface({
-    input: fileStream,
-    crlfDelay: Infinity
-    });
-    // Note: we use the crlfDelay option to recognize all instances of CR LF
-    // ('\r\n') in input.txt as a single line break.
-
-    for (const line of rl) {
-        
-    }  
-}
-
-function fixStreetName(filename) {
-
-    fs = require('fs')
     fs.readFile(filename, (err, data) => {
         if (err) console.log(err)
         else {
@@ -77,4 +47,7 @@ function fixStreetName(filename) {
         }
     });
 }
+
+const filename = 'streetNames.txt'
+fixStreetName(filename)
 
