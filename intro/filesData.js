@@ -1,4 +1,4 @@
-function createFiles(filesData){
+const createFiles = (filesData) => {
     const fs = require('fs')
 
     for (let i in filesData) {

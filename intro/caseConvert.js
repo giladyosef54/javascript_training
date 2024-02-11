@@ -1,7 +1,7 @@
 const fs = require('fs');
 
 
-function strOrEmpty (element) {
+const strOrEmpty = (element) => {
     return (typeof element? element: '')
 }
 
@@ -27,7 +27,7 @@ let converter = {
 }
 
 
-function fixStreetName(filename) {
+const fixStreetName = (filename) => {
     fs.readFile(filename, (err, data) => {
         if (err) console.log(err)
         else {
@@ -50,3 +50,4 @@ function fixStreetName(filename) {
 
 
 
+fixStreetName('streetNames.txt')
