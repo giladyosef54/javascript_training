@@ -1,8 +1,5 @@
-function initialNames(arrOfNames) {
-    return arrOfNames.map(fullName => {
-        return fullName.split(' ').map(partName => {
-            return partName[0].toUpperCase()
-        }).join('')
-    })
+const initialNames = (arrOfNames) => {
+    return arrOfNames.map(fullName => fullName.split(' ').map(partName => partName[0].toUpperCase()).join(''))
 }
+
 

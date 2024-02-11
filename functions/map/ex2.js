@@ -1,6 +1,2 @@
-function discount_10(arrOfPrices) {
-    return arrOfPrices.map(price => {
-        return price * 0.9
-    })
-}
+const discount_10 = (arrOfPrices) => arrOfPrices.map(price => price * 0.9)
 
