@@ -1,3 +1,2 @@
-function countVoters(arrOfVoters) {
-    return arrOfVoters.reduce((total, voter) => total + voter.voted , 0)
-}
+const countVoters = (arrOfVoters) => arrOfVoters.reduce((total, voter) => total + voter.voted , 0)
+

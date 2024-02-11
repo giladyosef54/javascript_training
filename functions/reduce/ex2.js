@@ -1,4 +1,3 @@
-function wishListCost(arrOfwishes) {
-    return arrOfwishes.reduce((total, wish) => total + wish.price , 0)
-}
+const wishListCost = (arrOfwishes) => arrOfwishes.reduce((total, wish) => total + wish.price , 0)
+
 
