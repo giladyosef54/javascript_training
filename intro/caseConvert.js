@@ -48,6 +48,5 @@ function fixStreetName(filename) {
     });
 }
 
-const filename = 'streetNames.txt'
-fixStreetName(filename)
+
 
