@@ -4,22 +4,15 @@ import { Username } from '../models/username';
 const router = Router();
 let usernames: Username[] = [];
 
-router.post('/', (req: Request, res: Response) => {
-    const userIndex: number = usernames.findIndex((un) => un.username == req.body.username)
-    if (userIndex == -1) {
+router.post('/saveUsersData', (req: Request, res: Response) => {
+    for (let userData of req.body.users) {
         const username: Username = {
-            username: req.body.username,
-            password: req.body.password
+            username: userData.username,
+            password: userData.password
         };
         usernames.push(username);
-        res.status(201).json();
     }
-    else if (usernames[userIndex].password == req.body.password) {
-        res.status(200).send('username and password matches.')
-    }
-    else {
-        res.status(404).send('username didn\'match password')
-    }
+    res.status(201).send('successfully saved');
 });
   
 
