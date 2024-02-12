@@ -1,5 +1,5 @@
 import express, { Request, Response } from 'express';
-import router from './routes/crud_username'
+import router from './server/crud_username'
 
 const app = express();
 const port = process.env.PORT || 3000;
