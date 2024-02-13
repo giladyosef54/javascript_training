@@ -1,9 +1,11 @@
-function createFailingPromise() {
+const logger = require('./utilities').logger
+
+const createFailingPromise = () => {
     return new Promise((reserve, rejected) => {
         rejected('FAILED') 
     })
 }
 
-function catchFailedPromise() {
-    createFailingPromise().catch((str) => console.log(str))
+const catchFailedPromise = () => {
+    createFailingPromise().catch((str) => logger.info(str))
 }
