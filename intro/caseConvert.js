@@ -1,4 +1,5 @@
 const fs = require('fs');
+const logger = require('./utilities').logger
 
 
 const strOrEmpty = (element) => {
@@ -7,7 +8,7 @@ const strOrEmpty = (element) => {
 
 
 
-let converter = {
+const converter = {
     camelCase: function (splitedData) {
         return strOrEmpty(splitedData[0]).toLowerCase() + this.pascalCase(splitedData.slice(1))
     },
