@@ -1,4 +1,6 @@
-function retrunRndIn3Sec() {
+const logger = require('./utilities').logger
+
+const  retrunRndIn3Sec = () => {
     return new Promise((resolve) => {
         setTimeout(() => {
             const utl = require('./utilities')
@@ -7,7 +9,8 @@ function retrunRndIn3Sec() {
     });
 }
   
-function printRandom() {
-    retrunRndIn3Sec().then(result => console.log(result));
+const printRandom = () => {
+    retrunRndIn3Sec().then(result => logger.info(result));
 }
 
+printRandom()
