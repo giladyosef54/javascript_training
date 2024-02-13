@@ -1,3 +1,1 @@
-function returnBothResolved(promise1, promise2) {
-    return Promise.all([promise1, promise2])
-}
+const returnBothResolved = (promise1, promise2) => Promise.all([promise1, promise2])
