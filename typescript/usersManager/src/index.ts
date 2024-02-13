@@ -1,7 +1,7 @@
-import express, { Request, Response } from 'express';
+import express from 'express';
 import router from './server/crud_username'
 import { ensureUserExistence } from './client/client_requests'
-import axios, { AxiosResponse } from 'axios';
+import {Logger} from 'tslog'
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -12,8 +12,11 @@ app.use('/', router)
 
 
 app.listen(port, () => {
-    console.log(`Server running at http://localhost:${port}`);
-    
+    const logger = new Logger({
+        minLevel: 3
+    })
+    logger.info(`Server running at http://localhost:${port}`);
+    ensureUserExistence('asda', 'sadadsa')
 });
 
 
