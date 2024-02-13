@@ -4,16 +4,62 @@ import { Username } from '../models/username';
 const router = Router();
 let users: Username[] = [];
 
+
+interface massageResponse {
+    status: number,
+    massage: string
+}
+
 router.post('/saveUsersData', (req: Request, res: Response) => {
+    let status: number = 201
+    let massage: string = 'Successfully saved.'
     for (let userData of req.body.users) {
-        const username: Username = {
+        const newUser: Username = {
             username: userData.username,
             password: userData.password
         };
-        users.push(username);
+        if (users.find((user => user.username = newUser.username)))
+        {
+            status = 207
+            massage = 'Some of the users were already exist, and were not re-saved.'
+        }
+        else users.push(newUser);
     }
-    res.status(201).send('successfully saved');
+    res.status(status).send(massage);
 });
+
+
+router.post('/saveOneUserData', (req: Request, res: Response) => {
+    const resParams = tryPushUser(req.body.username, req.body.password)
+    
+    res.status(resParams.status).send(resParams.massage);
+});
+
+
+const tryPushUser = (username: string, password: string): massageResponse => {
+    let status: number
+    let massage: string
+    
+    if (users.find((user => user.username = username)))
+    {
+        status = 409
+        massage = 'User already exist, data wasn\'t saved.'
+    }
+    else {
+        const newUser: Username = {
+            username: username,
+            password: password
+        };
+        status = 201
+        massage = 'Successfully saved.'
+        users.push(newUser);
+    }
+    const res: massageResponse = {
+        status: status,
+        massage: massage
+    }
+    return res
+}
 
 
 router.get('/getUserDetails/:username', (req: Request, res: Response) => {
@@ -23,10 +69,10 @@ router.get('/getUserDetails/:username', (req: Request, res: Response) => {
 })
 
 
-const un: Username = {
-    username: 'josef',
-    password: '31'
-};
-users.push(un);
+router.get('/getAllUsersDetails', (req: Request, res: Response) => {
+    res.status(200).json(users)
+})
+
+
 
 export default router;
