@@ -1,3 +1,5 @@
+const logger = require('./utilities').logger
+
 const createFiles = (filesData) => {
     const fs = require('fs')
 
@@ -5,9 +7,8 @@ const createFiles = (filesData) => {
         fs.writeFile(`${filesData[i].fileName}.${filesData[i].fileType}`,
                      filesData[i].fileData.toString(),
                      (err) => {
-                        if (err)
-                            console.log(err)
-                        else console.log('success!')
+                        if (err) logger.info(err)
+                        else logger.error('success!')
                      })
     }
 }
