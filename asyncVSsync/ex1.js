@@ -13,4 +13,3 @@ const printRandom = () => {
     retrunRndIn3Sec().then(result => logger.info(result));
 }
 
-printRandom()
