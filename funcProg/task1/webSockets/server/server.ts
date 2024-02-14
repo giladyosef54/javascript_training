@@ -1,16 +1,16 @@
 import { WebSocketServer } from "ws";
-import { serverLogger } from "./utilities";
+import { logger, getRndInt } from "../utilities/utilities";
 
 const port = 1234;
 const wss = new WebSocketServer({ port })
 
 
-wss.on('connection', (wsc) => {
-    wsc.on('massage', (data) => {
-        serverLogger.info(`Recieved mssaga from client: ${data}`)
+wss.on('connection', (ws) => {
+    ws.on('massage', (data) => {
+        logger.info(`Recieved mssaga from client: ${data}`)
     })
 
-    wsc.send('Hello, this is server')
+    ws.send('Hello, this is server')
 })
 
-serverLogger.info('WebSocket server.')
+logger.info('WebSocket server.')
