@@ -1,14 +1,11 @@
 import { Router, Request, Response } from 'express';
-import { Username } from '../models/username';
+import { Username, massageResponse } from '../models/username';
 
 const router = Router();
 let users: Username[] = [];
 
 
-interface massageResponse {
-    status: number,
-    massage: string
-}
+
 
 router.post('/saveUsersData', (req: Request, res: Response) => {
     let status: number = 201
