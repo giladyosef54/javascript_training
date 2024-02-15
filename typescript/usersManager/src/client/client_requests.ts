@@ -4,7 +4,7 @@ import {Logger} from 'tslog'
 
 
 export const ensureUserExistence = (username: string, password: string,
-        baseUrl: string = `http://${process.env.IP || 'localhost'}:${process.env.PORT || 3000}/`,
+        baseUrl: string = `http://${process.env.IP}:${process.env.PORT}/`,
         getUserRoute: string = 'getAllUsersDetails/', saveUserRoute: string = 'saveOneUserData') => {
     const logger = new Logger({
         minLevel: 3
