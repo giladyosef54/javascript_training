@@ -3,7 +3,8 @@ import { Username } from '../models/types'
 import {Logger} from 'tslog'
 
 
-export const ensureUserExistence = (username: string, password: string, baseUrl: string = 'http://localhost:3000/',
+export const ensureUserExistence = (username: string, password: string,
+        baseUrl: string = `http://${process.env.IP || 'localhost'}:${process.env.PORT || 3000}/`,
         getUserRoute: string = 'getAllUsersDetails/', saveUserRoute: string = 'saveOneUserData') => {
     const logger = new Logger({
         minLevel: 3

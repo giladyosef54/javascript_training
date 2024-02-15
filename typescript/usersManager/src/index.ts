@@ -5,6 +5,7 @@ import {Logger} from 'tslog'
 
 const app = express();
 const port = process.env.PORT || 3000;
+const ip = process.env.IP || 'localhost';
 
 app.use(express.json())
 app.use('/', router)
@@ -15,7 +16,7 @@ app.listen(port, () => {
     const logger = new Logger({
         minLevel: 3
     })
-    logger.info(`Server running at http://localhost:${port}`);
+    logger.info(`Server running at http://${ip}:${port}`);
     ensureUserExistence('asda', 'sadadsa')
 });
 
