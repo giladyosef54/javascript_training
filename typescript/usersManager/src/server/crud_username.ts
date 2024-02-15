@@ -1,5 +1,5 @@
 import { Router, Request, Response } from 'express';
-import { Username, massageResponse } from '../models/username';
+import { Username, massageResponse } from '../models/types';
 
 const router = Router();
 let users: Username[] = [];

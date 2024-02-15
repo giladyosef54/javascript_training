@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from 'axios'
-import { Username } from '../models/username'
+import { Username } from '../models/types'
 import {Logger} from 'tslog'
 
 
