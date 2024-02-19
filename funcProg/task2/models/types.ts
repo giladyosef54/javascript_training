@@ -1,8 +1,8 @@
-interface fileStructure {
+interface FileStructure {
     fileName: string,
     fileType: string,
     fileData: string
 }
 
 
-export { fileStructure }
+export { FileStructure }
