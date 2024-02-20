@@ -4,7 +4,6 @@ import { FileStructure } from "../models/types";
 import express, { Router, Request, Response } from 'express';
 
 import dotenv from 'dotenv';
-import { create } from "domain";
 dotenv.config()
 
 
@@ -82,5 +81,5 @@ router.post('/saveFileData', (req: Request, res: Response) => {
 
 
 app.listen(http_port, () => {
-    logger.info(`Server running at http://${ip}:${http_port}`);
+    logger.info(`Server running at ws://${ip}:${http_port}`);
 });

@@ -2,7 +2,7 @@ import { WebSocket } from "ws";
 import { logger, getRndInt } from "../utilities/utilities";
 
 const port = 1234
-const min: number = 0, max: number = 3
+const min: number = 0, max: number = 100
 
 
 class KeyWebSocket extends WebSocket {
