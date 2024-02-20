@@ -5,4 +5,4 @@ interface WebSocketWithId extends WebSocket{
 }
 
 
-export { WebSocket }
+export { WebSocketWithId }
