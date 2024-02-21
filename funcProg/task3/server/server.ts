@@ -87,6 +87,7 @@ wss.on('connection', (ws) => {
     ws.on('register', (name: Message) => {
         if (registered) ws.send("You can't register twice!")
         else {
+            name.text = name.text.trim()
             const result = registerUsername(name.text, ws)
             if (result != -1) {
                 registered = true

@@ -8,6 +8,11 @@ const port = process.env.PORT
 
 const ws = new WebSocket(`${ip}:${port}`)
 
+ws.on('message', (data) => {
+    
+})
+
+
 const replServer = start({ prompt: '> ' });
 
 replServer.defineCommand('register', {
@@ -23,6 +28,32 @@ replServer.defineCommand('register', {
 });
 
 
-ws.on('open', () => {
+replServer.defineCommand('brodcast', {
+    help: `Send message to all connected users`,
+    action : (message: string) => {
+        replServer.clearBufferedCommand();
+        ws.send(JSON.stringify({
+            eventName: 'brodcast',
+            eventData: message
+        }))
+        replServer.displayPrompt();
+    },
+});
 
-})
+
+replServer.defineCommand('target', {
+    help: `Enter your name, notice that you can't have a name which already exist.\nthis command has to work once and only once.`,
+    action : (targetNameAndMessage: string) => {
+        replServer.clearBufferedCommand();
+        const [targetName, message] = targetNameAndMessage.split('#')
+        ws.send(JSON.stringify({
+            eventName: 'target',
+            targetName: targetName.trim(),
+            eventData: message.trim()
+        }))
+        replServer.displayPrompt();
+    },
+});
+
+
+
