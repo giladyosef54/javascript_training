@@ -1,8 +1,10 @@
 import { WebSocket } from 'ws'
 
-interface WebSocketWithId extends WebSocket{
-    id: string
+
+interface WSMessage {
+    dst: string | undefined
+    message: string
 }
 
 
-export { WebSocketWithId }
+export { WSMessage }
