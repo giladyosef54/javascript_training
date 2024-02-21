@@ -1,6 +1,6 @@
 import { WebSocketServer, WebSocket } from "ws";
 import dotenv from 'dotenv';
-import { WSMessage, wsDetails } from '../models/types'
+import { Message, DstMessage, wsDetails } from '../models/types'
 dotenv.config();
 
 
@@ -19,21 +19,34 @@ const registerUsername = (name: string, ws: WebSocket) => {
             ws: ws
         }
         websockets.push(details)
-        return `Successfully registered!`
+        return details.id
     }
     else {
-        return `Not registered, this username already exist.`
+        return -1
     }
-        
-        
 }
+
+const deleteWsDetails = (id: number) => {
+    const index = websockets.findIndex(ws => ws.id == id)
+    if (index > -1 )
+        websockets.splice(index, 1)
+} 
+
+
 const brodcastAllOthers = (id: number, text: string) => {
     websockets.forEach((client) => {
        if (client.id != id) client.ws.send(text)
     });
 }
 
-const sendToTarget = (senderId: number, recieverId: number, text: string) => {
+const sendToTarget = (senderId: number, senderName: string, sender: WebSocket, recieverName: string, text: string) => {
+    const reciever = websockets.find(ws => ws.name == recieverName)
+    if (!reciever) {
+        sender.send(`A client with such name, doesn't exist`)
+    }
+    else {
+        reciever.ws.send(`You recieved message from ${senderName}, your message is:\n${text}`)
+    }
 
 }
 
@@ -50,41 +63,50 @@ wss.on('connection', (ws) => {
     })
 
     ws.on('close', () => {
-        const index = websockets.indexOf([id, ws], 0);
-        if (index > -1) {
-            websockets.splice(index, 1);
-        }
+        deleteWsDetails(id)
     })
 
     ws.on('message', (data) => {
-        const {eventName, eventData} = JSON.parse(data.toString())
+        const {eventName, ...eventData} = JSON.parse(data.toString())
 
         if (ws.listeners(eventName).length == 0) {
-
+            ws.send(`Such operation doesn't exist, please try again.\nyou may check for spelling.`)
         }
         else if (!registered) {
             ws.send("You haven't yet registered, please register first and then try again.")
         }
         else {
-            ws.emit(eventName, eventData)
+            try {
+                ws.emit(eventName, eventData)
+            }
+            catch (error) {
+                ws.send((error as TypeError).message)
+            }
         }
     })
 
-    ws.on('register', name => {
+    ws.on('register', (name: Message) => {
         if (registered) ws.send("You can't register twice!")
         else {
-            registered = true
-            ws.send(registerUsername(name, ws))
+            const result = registerUsername(name.text, ws)
+            if (result != -1) {
+                registered = true
+                id = result
+                username = name.text
+                ws.send(`Successfully registered!`)
+            }
+            else {
+                ws.send(`Not registered, this username already exist.`)
+            }
         }
     })
 
-
-    ws.on('brodcast', (text: string) => {
-        brodcastAllOthers(id, text)
+    ws.on('brodcast', (message: Message) => {
+        brodcastAllOthers(id, message.text)
     })
 
-    ws.on('target', (message: WSMessage) => {
-        
+    ws.on('target', (message: DstMessage) => {
+        sendToTarget(id, username, ws, message.dst, message.text)
     })
     
 })

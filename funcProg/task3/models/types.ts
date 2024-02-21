@@ -1,8 +1,12 @@
 import { WebSocket } from 'ws'
 
 
-interface WSMessage {
-    dst: string | undefined
+interface Message {
+    text: string
+}
+
+interface DstMessage {
+    dst: string,
     text: string
 }
 
@@ -13,4 +17,4 @@ interface wsDetails {
 }
 
 
-export { WSMessage, wsDetails }
+export { Message, DstMessage, wsDetails }
