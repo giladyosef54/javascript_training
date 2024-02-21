@@ -56,10 +56,8 @@ wss.on('connection', (ws) => {
     let username: string
     let registered = false
 
-    ws.on('open', () => {
-        id = idGen++
-        
-        ws.send("Register your name, until you don't have a name you can't send messages.")
+    ws.on('open', () => {     
+        ws.send("Hello you connected to the server. Please register your name, until you don't, you can't send messages.")
     })
 
     ws.on('close', () => {
