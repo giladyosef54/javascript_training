@@ -1,6 +1,6 @@
 import { WebSocketServer } from "ws";
 import dotenv from 'dotenv';
-import { WebSocketWithId, WSMessage } from '../models/types'
+import { WSMessage } from '../models/types'
 dotenv.config();
 
 
@@ -14,11 +14,11 @@ const brodcastAllOthers = (id: string) => {
     });
 } 
 
-wss.on('connection', (ws: WebSocketWithId) => {
+wss.on('connection', (ws) => {
     let id: number
     ws.on('open', () => {
         id = ipGen++
-        
+
     })
 
     ws.on('message', (data) => {
