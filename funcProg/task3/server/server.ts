@@ -12,7 +12,8 @@ const websockets: wsDetails[] = []
 
 
 const registerUsername = (name: string, ws: WebSocket) => {
-    if (websockets.find(details => details.name = name)) {
+    websockets.forEach(e => console.log(`{ id: ${e.id}, name: ${e.name} }`))
+    if (!websockets.find(details => details.name === name)) {
         const details: wsDetails = {
             id: idGen++,
             name: name,     
@@ -27,20 +28,20 @@ const registerUsername = (name: string, ws: WebSocket) => {
 }
 
 const deleteWsDetails = (id: number) => {
-    const index = websockets.findIndex(ws => ws.id == id)
+    const index = websockets.findIndex(ws => ws.id === id)
     if (index > -1 )
         websockets.splice(index, 1)
 } 
 
 
-const brodcastAllOthers = (id: number, text: string) => {
+const brodcastAllOthers = (senderId: number, senderName: string, text: string) => {
     websockets.forEach((client) => {
-       if (client.id != id) client.ws.send(text)
+       if (client.id != senderId) client.ws.send(`You recieved message from ${senderName}, your message is:\n${text}`)
     });
 }
 
-const sendToTarget = (senderId: number, senderName: string, sender: WebSocket, recieverName: string, text: string) => {
-    const reciever = websockets.find(ws => ws.name == recieverName)
+const sendToTarget = (senderName: string, sender: WebSocket, recieverName: string, text: string) => {
+    const reciever = websockets.find(ws => ws.name === recieverName)
     if (!reciever) {
         sender.send(`A client with such name, doesn't exist`)
     }
@@ -103,13 +104,11 @@ wss.on('connection', (ws) => {
     })
 
     ws.on('brodcast', (message: Message) => {
-        brodcastAllOthers(id, message.text)
+        brodcastAllOthers(id, username, message.text)
     })
 
     ws.on('target', (message: DstMessage) => {
-        sendToTarget(id, username, ws, message.dst, message.text)
+        sendToTarget(username, ws, message.dst, message.text)
     })
     
 })
-
-
