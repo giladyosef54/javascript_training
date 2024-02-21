@@ -3,8 +3,14 @@ import { WebSocket } from 'ws'
 
 interface WSMessage {
     dst: string | undefined
-    message: string
+    text: string
+}
+
+interface wsDetails {
+    id: number,
+    name: string,
+    ws: WebSocket
 }
 
 
-export { WSMessage }
+export { WSMessage, wsDetails }
