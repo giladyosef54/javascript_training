@@ -71,11 +71,12 @@ wss.on('connection', (ws) => {
         if (ws.listeners(eventName).length == 0) {
             ws.send(`Such operation doesn't exist, please try again.\nyou may check for spelling.`)
         }
-        else if (!registered) {
+        else if (!registered && eventName != 'register') {
             ws.send("You haven't yet registered, please register first and then try again.")
         }
         else {
             try {
+                console.log(`event name: ${eventName}, event data: ${JSON.stringify(eventData)}`)
                 ws.emit(eventName, eventData)
             }
             catch (error) {

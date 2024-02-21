@@ -8,12 +8,15 @@ const port = process.env.PORT
 
 const ws = new WebSocket(`${ip}:${port}`)
 
-ws.on('message', (data) => {
-    
-})
 
 
 const replServer = start({ prompt: '> ' });
+
+
+ws.on('message', (data) => {
+    replServer.write(data.toString() + '\n')
+})
+
 
 replServer.defineCommand('register', {
     help: `Enter your name, notice that you can't have a name which already exist.\nthis command has to work once and only once.`,
