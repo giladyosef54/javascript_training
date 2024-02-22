@@ -108,6 +108,7 @@ wss.on('connection', (ws) => {
     })
 
     ws.on('target', (message: DstMessage) => {
+        console.log(`Sender: ${username}, reciever: ${message.dst}, message: ${message.text}`)
         sendToTarget(username, ws, message.dst, message.text)
     })
     

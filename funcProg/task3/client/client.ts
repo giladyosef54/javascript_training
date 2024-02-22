@@ -50,21 +50,21 @@ replServer.defineCommand('target', {
     help: `Enter client's name to send massage to, and the message with "#" between the name and the message.`,
     action : (targetNameAndMessage: string) => {
         replServer.clearBufferedCommand();
-        const [targetName, message] = targetNameAndMessage.split('#')
+        const [dst, message] = targetNameAndMessage.split('#')
 
         console.log(targetNameAndMessage)
         console.log(targetNameAndMessage.split('#'))
         console.log(JSON.stringify({
             eventName: 'target',
-            targetName: targetName.trim(),
-            Text: message.trim()
+            targetName: dst,
+            text: message.trim()
         }))
         
         
         ws.send(JSON.stringify({
             eventName: 'target',
-            targetName: targetName.trim(),
-            Text: message.trim()
+            dst: dst,
+            text: message.trim()
         }))
         replServer.displayPrompt();
     },
