@@ -14,7 +14,6 @@ const replServer = start({ prompt: '> ' });
 
 
 ws.on('message', (data) => {
-    // replServer.write(data.toString() + '\n')
     console.log(data.toString())
     replServer.displayPrompt()
 })
@@ -51,14 +50,6 @@ replServer.defineCommand('target', {
     action : (targetNameAndMessage: string) => {
         replServer.clearBufferedCommand();
         const [dst, message] = targetNameAndMessage.split('#')
-
-        console.log(targetNameAndMessage)
-        console.log(targetNameAndMessage.split('#'))
-        console.log(JSON.stringify({
-            eventName: 'target',
-            targetName: dst,
-            text: message.trim()
-        }))
         
         
         ws.send(JSON.stringify({

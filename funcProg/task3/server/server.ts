@@ -36,7 +36,7 @@ const deleteWsDetails = (id: number) => {
 
 const brodcastAllOthers = (senderId: number, senderName: string, text: string) => {
     websockets.forEach((client) => {
-       if (client.id != senderId) client.ws.send(`You recieved message from ${senderName}, your message is:\n${text}`)
+       if (client.id != senderId) client.ws.send(`You recieved brodcast from ${senderName}, your message is:\n${text}`)
     });
 }
 
@@ -108,8 +108,7 @@ wss.on('connection', (ws) => {
     })
 
     ws.on('target', (message: DstMessage) => {
-        console.log(`Sender: ${username}, reciever: ${message.dst}, message: ${message.text}`)
-        sendToTarget(username, ws, message.dst, message.text)
+        sendToTarget(username, ws, message.dst.trim(), message.text)
     })
     
 })
