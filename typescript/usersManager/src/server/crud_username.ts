@@ -2,7 +2,7 @@ import { Router, Request, Response } from 'express';
 import { Username, massageResponse } from '../models/types';
 
 const router = Router();
-let users: Username[] = [];
+const users: Username[] = [];
 
 
 
