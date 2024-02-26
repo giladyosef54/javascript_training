@@ -2,9 +2,8 @@ const fs = require('fs');
 const logger = require('./utilities').logger
 
 
-const strOrEmpty = (element) => {
-    return (typeof element? element: '')
-}
+const strOrEmpty = element => typeof element || ''
+
 
 
 
