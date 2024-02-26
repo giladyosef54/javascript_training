@@ -1,7 +1,8 @@
 const logger = require('./utilities').logger
+const fs = require('fs')
 
 const createFiles = (filesData) => {
-    const fs = require('fs')
+    
 
     for (let i in filesData) {
         fs.writeFile(`${filesData[i].fileName}.${filesData[i].fileType}`,
