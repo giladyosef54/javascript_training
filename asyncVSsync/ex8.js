@@ -11,7 +11,7 @@ const createRiskyPromises = (amount) => {
             }, 10000)
         }))
     }
-    Promise.all(riskyPromises).then((massage) => {console.log(massage)}).catch(err => console.error(err))
+    Promise.all(riskyPromises).then((massage) => {utl.logger.info(massage)}).catch(err => utl.logger.error(err))
 }
 
 
