@@ -10,10 +10,10 @@ const strOrEmpty = (element) => {
 
 const converter = {
     camelCase: function (splitedData) {
-        return strOrEmpty(splitedData[0]).toLowerCase() + this.pascalCase(splitedData.slice(1))
+        return `${strOrEmpty(splitedData[0]).toLowerCase()}${this.pascalCase(splitedData.slice(1))}`
     },
     pascalCase: (splitedData) => {
-        return splitedData.map(element => strOrEmpty(element[0]).toUpperCase() + element.slice(1).toLowerCase()).join('')
+        return splitedData.map(element => `${strOrEmpty(element[0]).toUpperCase()}${element.slice(1).toLowerCase()}`).join('')
     },
     kebabCase: (splitedData) => {
         return splitedData.map((element) => element.toLowerCase()).join('-')
@@ -42,7 +42,10 @@ const fixStreetName = (filename) => {
                 fixData += converter[lineCase](lineData.split('_')) + '\n'
             }
             fs.writeFile('results.txt', fixData, (err) => {
-                if (err) logger.error(err)
+                if (err) {
+                    logger.error(err)
+                    return
+                }
                 else logger.info('Successfully written.')})
 
         }
