@@ -1,0 +1,1 @@
+const returnBothResolved = (promise1, promise2) => Promise.all([promise1, promise2])
