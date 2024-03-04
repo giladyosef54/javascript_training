@@ -2,15 +2,13 @@ const logger = require('./utilities').logger
 const fs = require('fs')
 
 const createFiles = (filesData) => {
-    
-
-    for (let i in filesData) {
-        fs.writeFile(`${filesData[i].fileName}.${filesData[i].fileType}`,
-                     filesData[i].fileData.toString(),
+    filesData.forEach(file => {
+        fs.writeFile(`${file.fileName}.${file.fileType}`,
+                     file.fileData.toString(),
                      (err) => {
-                        if (err) logger.info(err)
-                        else logger.error('success!')
+                        if (err) logger.error(err)
+                        else logger.info('success!')
                      })
-    }
+    })
 }
 
