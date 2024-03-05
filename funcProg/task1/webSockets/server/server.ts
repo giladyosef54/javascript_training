@@ -8,16 +8,16 @@ const wss = new WebSocketServer({ port })
 const tryAcomplish = (ws: WebSocket, min: number, max: number) => {
     const serverGuess = getRndInt(min, max)
     ws.send(JSON.stringify({
+        eventName: 'guess',
         message: `Tried to guess the number ${serverGuess}, did I succeed?`,
-        serverGuess: serverGuess,
-        isGuessing: true
+        serverGuess: serverGuess
     }))
 }
 
 const remindExistence = (ws: WebSocket) => {
     ws.send(JSON.stringify({
+        eventName: 'infoClient',
         message: 'Calculating next guess...',
-        isGuessing: false
     }))
 }
 
@@ -29,14 +29,20 @@ wss.on('connection', (ws) => {
         logger.info(`Recieved message from client: ${message}`)
 
         if (ws.listeners(eventName).length == 0) {
-            ws.send(`Such operation doesn't exist, please try again.\nyou may check for spelling.`)
+            ws.send(JSON.stringify({
+                eventName: 'eventNameError',
+                message: `Such event doesn't exist.`
+            }))
         }
         else {
             try {
                 ws.emit(eventName, eventData)
             }
             catch (error) {
-                ws.send((error as TypeError).message)
+                ws.send(JSON.stringify({
+                    eventName: 'eventParametersError',
+                    message: (error as TypeError).message
+                }))
             }
         }
     })
