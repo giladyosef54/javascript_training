@@ -29,13 +29,10 @@ wss.on('connection', (ws) => {
         logger.info(`Recieved message from client: ${message}`)
 
         if (ws.listeners(eventName).length == 0) {
-            console.log(`No such event.`)
             ws.send(`Such operation doesn't exist, please try again.\nyou may check for spelling.`)
         }
         else {
             try {
-                console.log(`Event name: ${eventName}.`)
-                console.log(`Event Data: ${JSON.stringify(eventData)}.`)
                 ws.emit(eventName, eventData)
             }
             catch (error) {
@@ -45,17 +42,14 @@ wss.on('connection', (ws) => {
     })
 
     ws.on('initGame', ({min, max}) => {
-        console.log(`initGame event.`)
         setInterval(tryAcomplish, 200, ws, min, max)
         setTimeout(setInterval, 100, remindExistence, 200, ws)
     })
 
     ws.on('miss', ({}) => {
-        console.log(`miss event.`)
     })
 
     ws.on('hit', ({}) => {
-        console.log(`hit event.`)
         ws.terminate()
     })
 })

@@ -34,7 +34,7 @@ kws.on('message', (data) => {
         {
             kws.send(JSON.stringify({
                 eventName: 'hit',
-                message: `You won the game!`
+                message: `${parsedData.serverGuess} was successful! You won the game!!!`
             }))
         }
         else {
