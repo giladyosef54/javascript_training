@@ -48,8 +48,8 @@ wss.on('connection', (ws) => {
     })
 
     ws.on('initGame', ({min, max}) => {
-        setInterval(tryAcomplish, 200, ws, min, max)
-        setTimeout(setInterval, 100, remindExistence, 200, ws)
+        setInterval(tryAcomplish, 2000, ws, min, max)
+        setTimeout(setInterval, 1000, remindExistence, 2000, ws)
     })
 
     ws.on('miss', ({}) => {

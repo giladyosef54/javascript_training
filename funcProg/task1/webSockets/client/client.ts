@@ -27,26 +27,6 @@ kws.on('open', () => {
 
 
 kws.on('message', (data) => {
-    const parsedData = JSON.parse(data.toString())
-    logger.info(`Recieved message from the server: ${parsedData.message}`)
-    if (parsedData.isGuessing === true) {
-        if (parsedData.serverGuess === kws.key)
-        {
-            kws.send(JSON.stringify({
-                eventName: 'hit',
-                message: `${parsedData.serverGuess} was successful! You won the game!!!`
-            }))
-        }
-        else {
-            kws.send(JSON.stringify({
-                eventName: 'miss',
-                message: `${parsedData.serverGuess} was failed guess, try again.`,
-            }))
-        }
-    }  
-})
-
-kws.on('message', (data) => {
     const {eventName, message, ...eventData} = JSON.parse(data.toString())
     logger.info(`Recieved message from server: ${message}`)
 
@@ -76,4 +56,14 @@ kws.on('guess', ({serverGuess}) => {
     }
 })
 
+kws.on('infoClient', ({}) => {
+    
+})
 
+kws.on('eventNameError', ({}) => {
+    
+})
+
+kws.on('eventParametersError', ({}) => {
+
+})
