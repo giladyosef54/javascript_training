@@ -22,35 +22,21 @@ const remindExistence = (ws: WebSocket) => {
 
 
 wss.on('connection', (ws) => {
-    ws.on('message', (data) => {
-        const parsedData = JSON.parse(data.toString())
-        logger.info(`Recieved message from client: ${parsedData.message}`)
-        
-        if (parsedData.messageType === 'initGame')
-        {
-            
-            const tryAcomplish = () => {
-                const serverGuess = getRndInt(parsedData.min, parsedData.max)
-                ws.send(JSON.stringify({
-                    message: `Tried to guess the number ${serverGuess}, did I succeed?`,
-                    serverGuess: serverGuess,
-                    isGuessing: true
-                }))
-            }
-            const remindExistence = () => {
-                ws.send(JSON.stringify({
-                    message: 'Calculating next guess...',
-                    isGuessing: false
-                }))
-            }
 
-            setInterval(tryAcomplish, 2000)
-            setTimeout(setInterval, 1000, remindExistence, 2000)
-            
+    ws.on('message', (data) => {
+        const {eventName, ...eventData} = JSON.parse(data.toString())
+        logger.info(`Recieved message from client: ${eventData.message}`)
+
+        if (ws.listeners(eventName).length == 0) {
+            ws.send(`Such operation doesn't exist, please try again.\nyou may check for spelling.`)
         }
-        else if (parsedData.messageType === 'hit')
-        {
-            ws.terminate()
+        else {
+            try {
+                ws.emit(eventName, ...eventData)
+            }
+            catch (error) {
+                ws.send((error as TypeError).message)
+            }
         }
     })
 
