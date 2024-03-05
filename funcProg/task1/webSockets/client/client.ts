@@ -17,8 +17,8 @@ kws.on('open', () => {
     logger.info('Client connected.')
     kws.key = getRndInt(min, max)
     kws.send(JSON.stringify({
+        eventName: 'initGame',
         message: `Hello this is a client, please guess a number between ${min} to ${max}`,
-        messageType: 'initGame',
         min: min,
         max: max
     }))
@@ -33,14 +33,14 @@ kws.on('message', (data) => {
         if (parsedData.serverGuess === kws.key)
         {
             kws.send(JSON.stringify({
-                message: `You won the game!`,
-                messageType: 'hit'
+                eventName: 'hit',
+                message: `You won the game!`
             }))
         }
         else {
             kws.send(JSON.stringify({
-                message: `Failed guessing, try again.`,
-                messageType: 'miss'
+                eventName: 'miss',
+                message: `${parsedData.serverGuess} was failed guess, try again.`,
             }))
         }
     }  
