@@ -45,3 +45,35 @@ kws.on('message', (data) => {
         }
     }  
 })
+
+kws.on('message', (data) => {
+    const {eventName, message, ...eventData} = JSON.parse(data.toString())
+    logger.info(`Recieved message from server: ${message}`)
+
+    if (kws.listeners(eventName).length != 0) {
+        try {
+            kws.emit(eventName, eventData)
+        }
+        catch (error) {
+            logger.error((error as TypeError).message)
+        }
+    }
+})
+
+kws.on('guess', ({serverGuess}) => {
+    if (serverGuess === kws.key)
+    {
+        kws.send(JSON.stringify({
+            eventName: 'hit',
+            message: `${serverGuess} was successful! You won the game!!!`
+        }))
+    }
+    else {
+        kws.send(JSON.stringify({
+            eventName: 'miss',
+            message: `${serverGuess} was failed guess, try again.`,
+        }))
+    }
+})
+
+
