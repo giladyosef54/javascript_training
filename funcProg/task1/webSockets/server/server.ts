@@ -31,7 +31,7 @@ wss.on('connection', (ws) => {
         if (ws.listeners(eventName).length == 0) {
             ws.send(JSON.stringify({
                 eventName: 'eventNameError',
-                message: `Such event doesn't exist.`
+                message: `Such event doesn't exist, event name: ${eventName}.`
             }))
         }
         else {
