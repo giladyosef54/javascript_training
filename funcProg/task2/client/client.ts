@@ -24,20 +24,20 @@ const getFileIndex = (fileStructure: FileStructure) => filesStructLogger.findInd
     file.fileName == fileStructure.fileName && file.fileType == fileStructure.fileType)
 
 
-const logRequest = (newFile: FileStructure) => {
+const logRequest = (fileStrut: FileStructure) => {
     
     const createFile = (newFile: FileStructure) => {
         filesStructLogger.push(newFile)
     }
     const modifyFile = (fileIndex: number) => {
-        filesStructLogger[fileIndex].fileData += newFile.fileData
+        filesStructLogger[fileIndex].fileData += fileStrut.fileData
     }
     
 
-    const fileIndex = getFileIndex(newFile)
+    const fileIndex = getFileIndex(fileStrut)
     
     
-    if (fileIndex == -1) createFile(newFile)
+    if (fileIndex == -1) createFile(fileStrut)
     else modifyFile(fileIndex)
 }
 
