@@ -8,8 +8,6 @@ dotenv.config()
 
 
 
-// Implemets routes
-
 const app = express();
 const router = Router();
 
@@ -54,6 +52,9 @@ router.post('/saveFileData', (req: Request, res: Response) => {
 
     ws.on('open', () => {
         logger.info('Client connected.')
+        logRequest(fileStructure)
+    
+        ws.send(JSON.stringify(fileStructure))
     })
 
 
@@ -67,19 +68,10 @@ router.post('/saveFileData', (req: Request, res: Response) => {
         if (serverRes.fileContent == filesStructLogger[getFileIndex(fileStructure)].fileData)
             ws.close()
         else throw new Error
-    })
-
-    setTimeout(()=>{
-        
-        logRequest(fileStructure)
-    
-        ws.send(JSON.stringify(fileStructure))
-    }, 100)
-
-    
+    })    
 });
 
 
 app.listen(http_port, () => {
-    logger.info(`Server running at ws://${ip}:${http_port}`);
+    logger.info(`Server running at ${ip}:${http_port}`);
 });
