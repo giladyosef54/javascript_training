@@ -42,8 +42,4 @@ wss.on('connection', ws=> {
         else modifyFile(newFile, fileIndex, ws)
 
     })
-
-    ws.on('close', () => {
-
-    })
 })
