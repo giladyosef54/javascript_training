@@ -24,21 +24,22 @@ const getFileIndex = (fileStructure: FileStructure) => filesStructLogger.findInd
     file.fileName == fileStructure.fileName && file.fileType == fileStructure.fileType)
 
 
-const logRequest = (fileStrut: FileStructure) => {
+const logRequest = (filesStatusLogger: FileStructure[], fileStruct: FileStructure) => {
     
     const createFile = (newFile: FileStructure) => {
-        filesStructLogger.push(newFile)
+        filesStatusLogger.push(newFile)
     }
-    const modifyFile = (fileIndex: number) => {
-        filesStructLogger[fileIndex].fileData += fileStrut.fileData
+    const modifyFile = (fileStruct: FileStructure, fileIndex: number) => {
+        filesStatusLogger[fileIndex].fileData += fileStruct.fileData
     }
     
 
-    const fileIndex = getFileIndex(fileStrut)
+    const fileIndex = getFileIndex(fileStruct)
     
     
-    if (fileIndex == -1) createFile(fileStrut)
-    else modifyFile(fileIndex)
+    if (fileIndex == -1) filesStatusLogger.push(fileStruct)
+    else filesStatusLogger[fileIndex].fileData += fileStruct.fileData
+
 }
 
 
@@ -52,7 +53,7 @@ router.post('/saveFileData', (req: Request, res: Response) => {
 
     ws.on('open', () => {
         logger.info('Client connected.')
-        logRequest(fileStructure)
+        logRequest(filesStructLogger, fileStructure)
     
         ws.send(JSON.stringify(fileStructure))
     })
