@@ -4,8 +4,8 @@ import { FileStructure } from "../models/types";
 import express, { Router, Request, Response } from 'express';
 import { readFileSync, writeFileSync, existsSync } from "fs";
 
-import dotenv from 'dotenv';
-dotenv.config()
+import {config} from 'dotenv';
+config()
 
 
 
