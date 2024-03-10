@@ -2,15 +2,16 @@ import { WebSocket } from "ws";
 import { logger } from "../utilities/utilities";
 import { FileStructure } from "../models/types";
 import {Router, Request, Response } from 'express';
-import * as express from 'express'
+import express from 'express';
 import { readFileSync, writeFileSync, existsSync } from "fs";
-
 import {config} from 'dotenv';
+
 config()
 
 
-
 const app = express();
+
+
 const router = Router();
 
 
