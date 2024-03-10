@@ -1,7 +1,8 @@
 import { WebSocket } from "ws";
 import { logger } from "../utilities/utilities";
 import { FileStructure } from "../models/types";
-import express, { Router, Request, Response } from 'express';
+import {Router, Request, Response } from 'express';
+import * as express from 'express'
 import { readFileSync, writeFileSync, existsSync } from "fs";
 
 import {config} from 'dotenv';

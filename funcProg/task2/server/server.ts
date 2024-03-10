@@ -1,8 +1,8 @@
 import { WebSocketServer, WebSocket } from "ws";
 import {FileStructure} from '../models/types'
 import { logger } from "../utilities/utilities";
-import dotenv from 'dotenv';
-dotenv.config();
+import {config} from 'dotenv';
+config();
 
 const files: FileStructure[] = []
 
