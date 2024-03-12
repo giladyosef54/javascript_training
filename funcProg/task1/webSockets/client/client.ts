@@ -27,8 +27,7 @@ kws.on('open', () => {
 
 
 kws.on('message', (data) => {
-    const {eventName, message, ...eventData} = JSON.parse(data.toString())
-    logger.info(`Recieved message from server: ${message}`)
+    const {eventName, ...eventData} = JSON.parse(data.toString())
 
     if (kws.listeners(eventName).length != 0) {
         try {
@@ -40,7 +39,8 @@ kws.on('message', (data) => {
     }
 })
 
-kws.on('guess', ({serverGuess}) => {
+kws.on('guess', ({serverGuess, message}) => {
+    logger.info(`Recieved guess request from server: ${message}`)
     if (serverGuess === kws.key)
     {
         kws.send(JSON.stringify({
@@ -56,14 +56,14 @@ kws.on('guess', ({serverGuess}) => {
     }
 })
 
-kws.on('infoClient', ({}) => {
-    
+kws.on('infoClient', ({message}) => {
+    logger.info(`Recieved info from server: ${message}`)
 })
 
-kws.on('eventNameError', ({}) => {
-    
+kws.on('eventNameError', ({message}) => {
+    logger.info(`Recieved event name error from server: ${message}`)
 })
 
-kws.on('eventParametersError', ({}) => {
-
+kws.on('eventParametersError', ({message}) => {
+    logger.info(`Recieved event parameter error from server: ${message}`)
 })
