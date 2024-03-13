@@ -8,8 +8,8 @@ logger.info(`Server is listening on ${port}.`)
 
 
 const tryAcomplish = (ws: WebSocket, min: number, max: number) => {
-    logger.info(`Gussing a number, and send a guess request to client to check if i won.`)
     const serverGuess = getRndInt(min, max)
+    logger.info(`Gussing the number ${serverGuess}, and send a guess request to client to check if i won.`)
     ws.send(JSON.stringify({
         eventName: 'guess',
         message: `Tried to guess the number ${serverGuess}, did I succeed?`,
