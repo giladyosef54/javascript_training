@@ -32,10 +32,12 @@ kws.on('message', (data) => {
     const {eventName, ...eventData} = JSON.parse(data.toString())
     logger.info(`Some kind of data recieved from server.`)
     if (kws.listeners(eventName).length != 0) {
+        logger.info(`A fit event for server's data exist, now emiting this event.`)
         try {
             kws.emit(eventName, eventData)
         }
         catch (error) {
+            logger.error(`Something went wrong with the emiting, or maybe other unhandled exeption occured during the event.`)
             logger.error((error as TypeError).message)
         }
     }
