@@ -1,7 +1,7 @@
 import { createLogger, transports, format } from "winston";
 
 
-const logger = createLogger({
+export const logger = createLogger({
     transports: [new transports.Console()],
     format: format.combine(
         format.colorize(),
@@ -12,4 +12,3 @@ const logger = createLogger({
     ),
 });
 
-export {logger}
