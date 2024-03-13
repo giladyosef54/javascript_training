@@ -22,10 +22,9 @@ const http_port = process.env.HTTP_PORT
 const ip = process.env.IP
 const filesStructLogger = process.env.FILES_STRUCTURE_LOGGER || 'filesStructureLogger.json'
 
-// const filesStructLogger: FileStructure[] = [];
 
 const getFileIndex = (filesStructLogger: FileStructure[], fileStructure: FileStructure) => filesStructLogger.findIndex(file =>
-    file.fileName == fileStructure.fileName && file.fileType == fileStructure.fileType)
+    file.fileName === fileStructure.fileName && file.fileType === fileStructure.fileType)
 
 
 const logRequest = (filesStructureLoggerPath: string, fileStruct: FileStructure) => {
@@ -36,7 +35,7 @@ const logRequest = (filesStructureLoggerPath: string, fileStruct: FileStructure)
     const filesStructLogger = JSON.parse(readFileSync(filesStructureLoggerPath).toString())
     const fileIndex = getFileIndex(filesStructLogger, fileStruct)
 
-    if (fileIndex == -1) filesStructLogger.push(fileStruct)
+    if (fileIndex === -1) filesStructLogger.push(fileStruct)
     else {
         filesStructLogger[fileIndex].fileData += fileStruct.fileData
     }

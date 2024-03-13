@@ -7,6 +7,7 @@ dotenv.config();
 const port = +(process.env.PORT || '3000')
 const wss = new WebSocketServer( { port } )
 
+
 let idGen = 0
 const websockets: wsDetails[] = []
 
@@ -57,6 +58,8 @@ wss.on('connection', (ws) => {
     let id: number
     let username: string
     let registered = false
+
+    
 
     ws.on('open', () => {     
         ws.send("Hello you connected to the server. Please register your name, until you don't, you can't send messages.")
