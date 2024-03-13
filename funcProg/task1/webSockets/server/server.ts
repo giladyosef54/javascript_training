@@ -4,6 +4,8 @@ import { logger, getRndInt } from "../utilities/utilities";
 const port = 1234;
 const wss = new WebSocketServer({ port })
 
+logger.info(`Server is listening on ${port}.`)
+
 
 const tryAcomplish = (ws: WebSocket, min: number, max: number) => {
     logger.info(`Gussing a number, and send a guess request to client to check if i won.`)
